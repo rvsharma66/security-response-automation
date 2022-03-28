@@ -14,7 +14,7 @@
 resource "google_cloudfunctions_function" "remove-non-org-members" {
   name                  = "RemoveNonOrganizationMembers"
   description           = "Removes all non-org members in which organization is not in the whitelist"
-  runtime               = "go113"
+  runtime               = "go116"
   available_memory_mb   = 128
   source_archive_bucket = var.setup.gcf-bucket-name
   source_archive_object = var.setup.gcf-object-name

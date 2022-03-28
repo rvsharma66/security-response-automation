@@ -16,7 +16,7 @@
 resource "google_cloudfunctions_function" "revoke_member_function" {
   name                  = "IAMRevoke"
   description           = "Revokes IAM Event Threat Detection anomalous IAM grants."
-  runtime               = "go113"
+  runtime               = "go116"
   available_memory_mb   = 128
   source_archive_bucket = var.setup.gcf-bucket-name
   source_archive_object = var.setup.gcf-object-name
@@ -32,6 +32,10 @@ resource "google_cloudfunctions_function" "revoke_member_function" {
   }
   environment_variables = {
     GCP_PROJECT = var.setup.automation-project
+  }
+  timeouts {
+    create = "10m"
+    update = "10m"
   }
 }
 

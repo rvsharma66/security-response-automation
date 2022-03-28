@@ -14,7 +14,7 @@
 resource "google_cloudfunctions_function" "remove-public-ip" {
   name                  = "RemovePublicIP"
   description           = "Removes all the external IP addresses of a GCE instance."
-  runtime               = "go113"
+  runtime               = "go116"
   available_memory_mb   = 128
   source_archive_bucket = var.setup.gcf-bucket-name
   source_archive_object = var.setup.gcf-object-name
@@ -30,6 +30,10 @@ resource "google_cloudfunctions_function" "remove-public-ip" {
   }
   environment_variables = {
     GCP_PROJECT = var.setup.automation-project
+  }
+  timeouts {
+    create = "10m"
+    update = "10m"
   }
 }
 

@@ -6,6 +6,7 @@ locals {
 // GCF
 resource "google_storage_bucket" "gcf_bucket" {
   name = local.bucket-name
+  location = var.region
 }
 
 resource "google_storage_bucket_object" "gcf_object" {

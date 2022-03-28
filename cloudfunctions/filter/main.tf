@@ -15,7 +15,7 @@
 resource "google_cloudfunctions_function" "filter" {
   name                  = "Filter"
   description           = "Filters finding JSON for exceptions, baselines and false positives using Rego"
-  runtime               = "go113"
+  runtime               = "go116"
   available_memory_mb   = 512
   source_archive_bucket = var.setup.gcf-bucket-name
   source_archive_object = var.setup.gcf-object-name
@@ -32,6 +32,11 @@ resource "google_cloudfunctions_function" "filter" {
   environment_variables = {
     OUTPUT_TOPIC = var.setup.router-topic-name
     GCP_PROJECT  = var.setup.automation-project
+  }
+
+  timeouts {
+    create = "10m"
+    update = "10m"
   }
 }
 
